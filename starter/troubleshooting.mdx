@@ -1,0 +1,24 @@
+---
+title: "Starter · Troubleshooting"
+description: "Common issues and fixes while running the starter."
+---
+
+## Types not found
+
+```bash
+cd packages/types
+npm run build
+```
+
+## API won’t start
+
+1. Verify Postgres and Redis are running
+2. Check `.env` in `apps/api`
+3. Run `npx prisma generate` in `apps/api`
+
+## Frontend cannot connect
+
+1. Ensure API is on port 8080
+2. Check `VITE_API_URL` in `apps/web/.env`
+3. Hard refresh or clear cache
+

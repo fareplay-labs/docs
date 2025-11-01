@@ -1,0 +1,63 @@
+---
+title: "SDK · Quickstart"
+description: "Use Discovery and Casino clients plus crypto in minutes."
+---
+
+## Discovery
+
+```ts
+import { FareDiscoveryClient } from '@fareplay/sdk';
+
+const discovery = new FareDiscoveryClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+});
+
+// Register
+await discovery.registerCasino({
+  name: 'My Casino',
+  url: 'https://mycasino.com',
+  publicKey: 'your-public-key',
+  signature: 'signature',
+  metadata: { games: ['slots'] },
+});
+
+// List
+const casinos = await discovery.getCasinos({ status: 'online', limit: 20 });
+```
+
+## Casino
+
+```ts
+import { FareCasinoClient } from '@fareplay/sdk';
+
+const casino = new FareCasinoClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+  casinoId: 'uuid',
+  privateKey: 'base58-private-key',
+});
+
+// Heartbeat
+await casino.sendHeartbeat({ status: 'online', timestamp: Date.now() });
+
+// Start interval
+const stop = casino.startHeartbeat(60_000, 'online');
+// call stop() to end
+```
+
+## Crypto
+
+```ts
+import {
+  signMessage,
+  verifySolanaSignature,
+  createSignedPayload,
+  generateKeypair,
+} from '@fareplay/sdk';
+
+const { publicKey, privateKey } = generateKeypair();
+const sig = signMessage('hello', privateKey);
+const ok = verifySolanaSignature('hello', sig, publicKey);
+
+const payload = createSignedPayload({ a: 1, b: 2 }, privateKey);
+```
+

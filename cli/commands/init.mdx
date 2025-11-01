@@ -1,0 +1,32 @@
+---
+title: "CLI · init"
+description: "Initialize and deploy a new custom casino."
+---
+
+## Usage
+
+```bash
+fare init <casino-name>
+```
+
+## What it does
+
+- Validates `<casino-name>` (lowercase letters, numbers, hyphens; 3–30 chars; cannot start/end with `-`)
+- Ensures Fly CLI is installed and attempts auto-install/fix if missing
+- Prompts for Fly.io authentication and lets you select an organization
+- Runs a configuration wizard and generates `.env` and `fare.config.json`
+- Provisions Postgres, Redis, and Tigris
+- Sets secrets, builds, and deploys to Fly.io as `fare-<casino-name>`
+
+## Prompts
+
+- Solana owner wallet address
+- RPC provider URL
+- JWT secret (auto-generate or provide)
+
+## Output
+
+- Local path: `~/.fare-casinos/<casino-name>`
+- App hostname: `https://fare-<casino-name>.fly.dev`
+- WebSocket: `wss://fare-<casino-name>.fly.dev:3001`
+

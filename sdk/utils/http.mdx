@@ -1,0 +1,33 @@
+---
+title: "SDK · HTTP Utils"
+description: "Typed fetch wrapper with retries, timeouts, and Zod validation."
+---
+
+## HttpClient
+
+```ts
+import { HttpClient, createHttpClient } from '@fareplay/sdk';
+
+const http = createHttpClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+  timeout: 30000,
+  retries: 3,
+  retryDelay: 1000,
+  headers: { 'X-API-Key': '...' },
+});
+```
+
+### Methods
+
+- `get(path, { params, headers, schema })`
+- `post(path, { body, headers, schema })`
+- `put(path, { body, headers, schema })`
+- `patch(path, { body, headers, schema })`
+- `delete(path, { headers, schema })`
+
+Responses are parsed as JSON and validated when `schema` is provided.
+
+## Errors
+
+`HttpClientError` includes `statusCode`, `code`, and `details` when available.
+

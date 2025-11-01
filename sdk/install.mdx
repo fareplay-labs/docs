@@ -1,0 +1,32 @@
+---
+title: "SDK · Install"
+description: "Install @fareplay/sdk and supported runtimes."
+---
+
+## Install
+
+```bash
+npm install @fareplay/sdk
+# or
+yarn add @fareplay/sdk
+# or
+bun add @fareplay/sdk
+```
+
+## Requirements
+
+- Node.js 18+
+- Fetch API available (Node 18+ includes global fetch)
+
+## Configure base URL
+
+Most constructors require a `baseUrl`:
+
+```ts
+import { FareDiscoveryClient } from '@fareplay/sdk';
+
+const discovery = new FareDiscoveryClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+});
+```
+

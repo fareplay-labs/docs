@@ -1,0 +1,37 @@
+---
+title: "Starter · Deployment"
+description: "Deploy the backend on Fly.io and the frontend on your host."
+---
+
+## Backend (Fly.io)
+
+```bash
+cd apps/api
+
+# Create app
+fly apps create my-casino-api
+
+# Provision Postgres and Redis
+fly postgres create --name my-casino-db
+fly postgres attach my-casino-db
+fly redis create --name my-casino-redis
+fly redis attach my-casino-redis
+
+# Set secrets
+fly secrets set \
+  CASINO_NAME="My Casino" \
+  SOLANA_OWNER_ADDRESS="..." \
+  SOLANA_RPC_URL="https://api.mainnet-beta.solana.com"
+
+# Deploy
+fly deploy
+```
+
+## Frontend (Vercel/Netlify)
+
+```bash
+cd apps/web
+npm run build
+# Deploy the dist/ folder
+```
+

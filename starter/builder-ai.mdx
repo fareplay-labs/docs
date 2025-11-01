@@ -1,0 +1,89 @@
+---
+title: "Starter · Builder/AI"
+description: "AI-assisted theme and asset generation, queues, and endpoints."
+---
+
+## Overview
+
+The Builder/AI module helps generate casino themes and game assets using AI, process work via BullMQ queues, and apply results to `CasinoSettings`.
+
+Packages:
+- NestJS module: `apps/api/src/modules/builder/*`
+- Queues: `builder-design`, `builder-element` (BullMQ / Redis)
+- Gateway: `BuilderGateway` for live updates
+
+## Environment
+
+Required (when AI enabled):
+
+```bash
+AI_ENABLED=true
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o-mini       # optional override
+IMAGE_MODEL=dall-e-3           # optional override
+REDIS_URL=redis://localhost:6379
+```
+
+## Queues
+
+Queues are registered in `QueueModule` and `BuilderModule`:
+- `builder-design`: multi-step design pipeline
+- `builder-element`: single asset generation
+
+Jobs are persisted in Postgres via Prisma models and processed by:
+- `BuilderDesignProcessor`
+- `BuilderElementProcessor`
+
+## HTTP Endpoints
+
+All routes require `JwtAuthGuard` + `ManagerGuard`.
+
+```text
+POST /builder/design                 # create design job
+POST /builder/element                # create element job
+GET  /builder/jobs?type=design|element&limit&offset
+GET  /builder/job/:id
+POST /builder/apply-design/:jobId    # apply theme to CasinoSettings
+```
+
+### Create a design job
+
+```json
+POST /builder/design
+{
+  "casinoName": "My Casino",
+  "prompt": "neon cyberpunk theme",
+  "options": { "userAddress": "<owner-wallet>" }
+}
+```
+
+### Create an element job
+
+```json
+POST /builder/element
+{
+  "gameType": "dice",
+  "prompt": "glowing neon dice with cyberpunk background",
+  "parameterId": "optional",
+  "options": { "userAddress": "<owner-wallet>" }
+}
+```
+
+## Services
+
+- `OpenAiProvider`: wraps Chat Completions (JSON mode) and Image generation.
+- `AIGameDesignService`, `AIGenerationService`, `AIImageGenerationService`: generation utilities.
+- `OrchestratorService`: coordinates multi-step design flows.
+- `SchemaRegistryService`: validates structured outputs.
+- `MediaStorageService`: stores and returns asset URLs.
+- `BuilderService`: queues jobs and applies final theme to `CasinoSettings`.
+
+## Applying Themes
+
+`POST /builder/apply-design/:jobId` extracts colors, font, paragraph, and asset URLs from the job’s results and updates `CasinoSettings` (including `theme` JSON).
+
+## Frontend Hooks/UI
+
+The web app includes builder UI and store state (see `apps/web/src/components/builder/*` and `stores/builder.ts`) for initiating jobs and viewing progress.
+
+

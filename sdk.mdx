@@ -3,101 +3,32 @@ title: "SDK"
 description: "Official developer toolkit for Fare Protocol: typed clients, crypto, schemas."
 ---
 
-## Features
+## Explore
 
-- Typed API clients for Discovery and Casino services
-- Solana cryptographic utilities (signing and verification)
-- Protocol schemas with Zod
-- ESM + CJS builds with TypeScript declarations
+<Columns cols={3}>
+  <Card title="Install" icon="download" href="/sdk/install">
+    Install via npm, yarn, or bun.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/sdk/quickstart">
+    Discovery and Casino client usage in minutes.
+  </Card>
+  <Card title="Clients" icon="boxes-packing" href="/sdk/clients/discovery">
+    Typed HTTP clients for Discovery and Casino.
+  </Card>
+</Columns>
 
-## Installation
+<Columns cols={3}>
+  <Card title="Crypto" icon="key" href="/sdk/crypto/signing">
+    Sign and verify Solana messages and payloads.
+  </Card>
+  <Card title="Schemas" icon="sitemap" href="/sdk/schemas">
+    Zod schemas for protocol objects and responses.
+  </Card>
+  <Card title="HTTP Utils" icon="globe" href="/sdk/utils/http">
+    Typed HTTP client with retries and validation.
+  </Card>
+</Columns>
 
-```bash
-npm install @fareplay/sdk
-# or
-yarn add @fareplay/sdk
-# or
-bun add @fareplay/sdk
-```
-
-## Quick Start
-
-### Discovery Client
-
-```ts
-import { FareDiscoveryClient } from '@fareplay/sdk';
-
-const client = new FareDiscoveryClient({
-  baseUrl: 'https://api.discover.fareplay.io',
-});
-
-// Register a casino
-await client.registerCasino({
-  name: 'My Casino',
-  url: 'https://mycasino.com',
-  publicKey: 'your-solana-public-key',
-  metadata: { description: 'A fun casino', games: ['slots', 'dice', 'rps'] },
-});
-
-// Fetch all casinos
-const casinos = await client.getCasinos();
-```
-
-### Casino Client
-
-```ts
-import { FareCasinoClient } from '@fareplay/sdk';
-
-const client = new FareCasinoClient({
-  baseUrl: 'https://api.discover.fareplay.io',
-  casinoId: 'your-casino-id',
-  privateKey: 'your-private-key',
-});
-
-// Send heartbeat
-await client.sendHeartbeat({ status: 'online', timestamp: Date.now() });
-```
-
-### Signature Utilities
-
-```ts
-import { verifySolanaSignature, signMessage } from '@fareplay/sdk';
-
-const signature = await signMessage(message, privateKey);
-const isValid = verifySolanaSignature(message, signature, publicKey);
-```
-
-## Core Modules
-
-### Client
-
-- `FareDiscoveryClient` — register, update, and fetch casinos
-- `FareCasinoClient` — heartbeat and status from the casino side
-
-### Crypto
-
-- `signMessage()` — sign messages with Solana keypair
-- `verifySolanaSignature()` — verify Solana signatures
-
-### Schema
-
-Zod schemas for protocol objects (e.g., `CasinoMetadata`, `HeartbeatPayload`).
-
-## Development
-
-```bash
-bun install
-bun run build
-bun run typecheck
-bun run dev
-```
-
-## Versioning
-
-Implements Fare Protocol Spec v1.0.0.
-
-## Links
-
-- Getting Started, API reference, and more in the SDK repo `docs/` folder.
+Version: v1.0.0 (Protocol `fare_protocol_v1.0.0`)
 
 

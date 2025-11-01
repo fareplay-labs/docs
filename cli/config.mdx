@@ -1,0 +1,43 @@
+---
+title: "CLI · Configuration"
+description: "Files, directories, environment variables, and secrets."
+---
+
+## Directory layout
+
+```text
+~/.fare-casinos/<casino-name>/
+├── fare.config.json   # metadata used by the CLI
+├── .env               # generated from wizard and provisioning
+├── apps/              # backend monorepo from template
+└── ...
+```
+
+## fare.config.json
+
+Minimal metadata saved by the CLI:
+
+```json
+{
+  "casinoName": "my-awesome-casino",
+  "createdAt": "2025-01-01T00:00:00.000Z",
+  "deploymentPath": "/Users/you/.fare-casinos/my-awesome-casino"
+}
+```
+
+## .env
+
+Generated with values from the wizard and provisioning:
+
+- Casino: `CASINO_NAME`, `FRONTEND_URL`
+- Solana: `SOLANA_RPC_URL`, `SOLANA_OWNER_ADDRESS`
+- Discovery heartbeat: `HEARTBEAT_PRIVATE_KEY`
+- Auth: `JWT_SECRET`
+- Infra: `DATABASE_URL`, `REDIS_URL`
+- Runtime: `NODE_ENV`, `PORT`, `HOST`
+
+## Secrets on Fly.io
+
+The CLI sets secrets on the app using Fly GraphQL. They mirror your `.env` values so the app boots with correct configuration.
+
+

@@ -23,7 +23,9 @@ npm link
 
 ## Commands
 
-### `fareplay init <casino-name>`
+Binary: `fare`
+
+### `fare init <casino-name>`
 
 Initialize and deploy a new custom casino.
 
@@ -37,48 +39,86 @@ What it does:
 Example:
 
 ```bash
-fareplay init my-awesome-casino
+fare init my-awesome-casino
 ```
 
 Prompts include Solana owner wallet, RPC provider, and JWT secret.
 
-### `fareplay deploy`
+### `fare deploy`
 
 Rebuild and redeploy existing casino.
 
 ```bash
 cd ~/.fare-casinos/my-awesome-casino
-fareplay deploy
+fare deploy
 ```
 
-### `fareplay status`
+### `fare status`
 
 Check deployment health (api, ws, processor) and service URLs.
 
 ```bash
 cd ~/.fare-casinos/my-awesome-casino
-fareplay status
+fare status
 ```
 
-### `fareplay logs [service]`
+### `fare logs [service]`
 
 Stream logs from Fly.io services (`api`, `ws`, `processor`).
 
 ```bash
-fareplay logs        # all services
-fareplay logs api
-fareplay logs ws
-fareplay logs processor
+fare logs        # all services
+fare logs api
+fare logs ws
+fare logs processor
 ```
 
-### `fareplay cleanup`
+### `fare cleanup`
 
 Delete local casinos and Fly.io resources. Destructive — for development only.
 
 ```bash
-fareplay cleanup
-fareplay cleanup --org <org>
+fare cleanup
+fare cleanup --org <org>
 ```
+
+## Prerequisites
+
+- Node.js >= 18
+- Git
+- Fly.io CLI (`fly` or `flyctl`) installed and authenticated
+
+## Fly.io Authentication
+
+```bash
+fly auth login
+fly orgs list
+```
+
+During `fare init`, you’ll be prompted to select an organization if multiple are available.
+
+## Casino Directory Layout
+
+Casinos are stored under `~/.fare-casinos/<casino-name>`:
+
+```text
+~/.fare-casinos/
+└── my-awesome-casino/
+    ├── fare.config.json   # metadata (name, createdAt, path)
+    ├── .env               # environment variables generated from the wizard
+    ├── apps/              # backend monorepo (from template)
+    └── ...
+```
+
+## Environment Variables
+
+Generated `.env` includes:
+
+- `CASINO_NAME`, `FRONTEND_URL`
+- `SOLANA_RPC_URL`, `SOLANA_OWNER_ADDRESS`
+- `HEARTBEAT_PRIVATE_KEY`, `JWT_SECRET`
+- `DATABASE_URL`, `REDIS_URL` (set after provisioning)
+- `NODE_ENV`, `PORT`, `HOST`
 
 ## Development
 

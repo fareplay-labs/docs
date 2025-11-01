@@ -1,0 +1,23 @@
+---
+title: "CLI · status"
+description: "Check deployment health and service URLs."
+---
+
+## Usage
+
+```bash
+fare status
+```
+
+Run from within a casino directory.
+
+## Output
+
+- App status and hostname
+- Process groups (api, ws, processor) with running counts and region
+- API, WebSocket, and health URLs
+
+## Notes
+
+- If the app does not exist on Fly.io, you’ll be prompted to deploy first
+

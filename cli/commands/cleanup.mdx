@@ -1,0 +1,30 @@
+---
+title: "CLI · cleanup"
+description: "Destroy local and Fly.io resources (development only)."
+---
+
+## Usage
+
+```bash
+fare cleanup [--org <org-slug>]
+```
+
+## Behavior
+
+- Confirms destructive action
+- Determines organization (flag or prompt)
+- Deletes:
+  - Local dirs: `~/.fare-casinos/*`
+  - Fly apps: `fare-*`
+  - Postgres: `fare-*-db`
+  - Redis: `fare-*-redis`
+  - Tigris: `fare-*-storage`
+
+## Options
+
+- `-o, --org <org-slug>`: specify Fly.io organization
+
+## Warnings
+
+- This is irreversible; intended for dev/testing only
+

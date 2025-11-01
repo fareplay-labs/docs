@@ -1,0 +1,23 @@
+---
+title: "CLI · deploy"
+description: "Rebuild and redeploy the current casino."
+---
+
+## Usage
+
+```bash
+fare deploy
+```
+
+Run this command from within a casino directory (contains `fare.config.json`).
+
+## What it does
+
+- Builds the project
+- Deploys to Fly.io using existing app name `fare-<casino-name>`
+
+## Notes
+
+- Requires Fly.io authentication
+- Shows API/WS URLs and health endpoint on success
+

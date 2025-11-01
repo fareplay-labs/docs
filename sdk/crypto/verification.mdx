@@ -1,0 +1,22 @@
+---
+title: "SDK · Crypto · Verification"
+description: "Verify Solana signatures and payloads; validate key formats."
+---
+
+## verifySolanaSignature(message, signature, publicKey)
+Returns `true` if the base58 signature matches the message and public key.
+
+```ts
+import { verifySolanaSignature } from '@fareplay/sdk';
+const ok = verifySolanaSignature('hello', signature, publicKey);
+```
+
+## verifySignedPayload(payloadWithSignature, publicKey)
+Deterministically reconstructs the message (sorted keys) and verifies.
+
+## isValidPublicKey(publicKey)
+Checks base58 decode and 32-byte length.
+
+## isValidSignature(signature)
+Checks base58 decode and 64-byte length.
+

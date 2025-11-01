@@ -3,79 +3,110 @@
   "theme": "mint",
   "name": "Fareplay Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#410dff",
+    "light": "#4af5d3",
+    "dark": "#0a0a0a"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "CLI",
         "groups": [
           {
-            "group": "Getting started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Fareplay",
-        "groups": [
-          {
-            "group": "Components",
+            "group": "Getting Started",
             "pages": [
               "cli",
+              "cli/install",
+              "cli/config",
+              "cli/troubleshooting"
+            ]
+          },
+          {
+            "group": "Commands",
+            "pages": [
+              "cli/commands",
+              "cli/commands/init",
+              "cli/commands/deploy",
+              "cli/commands/status",
+              "cli/commands/logs",
+              "cli/commands/cleanup",
+              "cli/commands/keygen"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "SDK",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
               "sdk",
-              "casino-starter"
+              "sdk/install",
+              "sdk/quickstart"
+            ]
+          },
+          {
+            "group": "Clients",
+            "pages": [
+              "sdk/clients/discovery",
+              "sdk/clients/casino"
+            ]
+          },
+          {
+            "group": "Crypto",
+            "pages": [
+              "sdk/crypto/signing",
+              "sdk/crypto/verification"
+            ]
+          },
+          {
+            "group": "Schemas & Utils",
+            "pages": [
+              "sdk/schemas",
+              "sdk/utils/http"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Starter",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "casino-starter",
+              "starter/install",
+              "starter/env",
+              "starter/run"
+            ]
+          },
+          {
+            "group": "Backend",
+            "pages": [
+              "starter/backend-api",
+              "starter/websocket",
+              "starter/builder-ai"
+            ]
+          },
+          {
+            "group": "Frontend",
+            "pages": [
+              "starter/frontend"
+            ]
+          },
+          {
+            "group": "Deployment",
+            "pages": [
+              "starter/deployment"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "starter/scripts",
+              "starter/troubleshooting"
             ]
           }
         ]
@@ -84,33 +115,38 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "GitHub",
+          "href": "https://github.com/fareplay-labs",
+          "icon": "github"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Discord",
+          "href": "https://discord.com/invite/fareplay",
+          "icon": "discord"
+        },
+        {
+          "anchor": "Fare Protocol",
+          "href": "https://www.fareprotocol.io/",
+          "icon": "globe"
         }
       ]
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/fareplay-black-logo.svg",
+    "dark": "/logo/fareplay-white-logo.svg"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@fareplay.io"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Fareplay",
+      "href": "https://fareplay.io"
     }
   },
   "contextual": {
@@ -127,9 +163,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/fareplayio",
+      "github": "https://github.com/fareplay-labs"
     }
   }
 }

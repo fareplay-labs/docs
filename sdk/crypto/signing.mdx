@@ -1,0 +1,27 @@
+---
+title: "SDK · Crypto · Signing"
+description: "Sign messages, create signed payloads, generate and derive keypairs."
+---
+
+## signMessage(message, privateKey)
+Signs string or bytes with a base58 private key. Returns base58 signature.
+
+```ts
+import { signMessage } from '@fareplay/sdk';
+const sig = signMessage('hello', privateKey);
+```
+
+## createSignedPayload(payload, privateKey)
+Deterministically signs object payloads (sorted keys) and adds `signature` field.
+
+```ts
+import { createSignedPayload } from '@fareplay/sdk';
+const payload = createSignedPayload({ a: 1, b: 2 }, privateKey);
+```
+
+## getKeypairFromPrivateKey(privateKey)
+Returns `{ publicKey, privateKey }` (both base58) from a base58 private key.
+
+## generateKeypair()
+Generates a new `{ publicKey, privateKey }` pair in base58.
+

@@ -1,0 +1,31 @@
+---
+title: "Starter · Install"
+description: "Set up the @fare-casino-starter monorepo and dependencies."
+---
+
+## Prerequisites
+
+- Node.js 20+
+- npm 9+
+- PostgreSQL 14+
+- Redis 7+
+
+## Install dependencies
+
+```bash
+# at repo root
+npm install
+
+# build shared types
+cd packages/types && npm run build && cd ../..
+```
+
+## Verify tools
+
+```bash
+node -v
+npm -v
+psql --version
+redis-server --version
+```
+

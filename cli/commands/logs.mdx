@@ -1,0 +1,23 @@
+---
+title: "CLI · logs"
+description: "Stream logs from Fly.io services (api, ws, processor)."
+---
+
+## Usage
+
+```bash
+fare logs [service]
+
+# examples
+fare logs            # all
+fare logs api
+fare logs ws
+fare logs processor
+```
+
+## Notes
+
+- Valid services: `api`, `ws`, `processor`
+- Requires Fly.io authentication
+- If the app is missing, deploy it first
+

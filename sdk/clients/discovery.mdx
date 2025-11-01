@@ -1,0 +1,51 @@
+---
+title: "SDK · Discovery Client"
+description: "Register, update, and query casinos via the Discovery Service."
+---
+
+## Constructor
+
+```ts
+import { FareDiscoveryClient } from '@fareplay/sdk';
+
+const discovery = new FareDiscoveryClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+  timeout: 30000,
+  retries: 3,
+  retryDelay: 1000,
+  apiKey: 'optional-bearer-token',
+});
+```
+
+## Methods
+
+### registerCasino
+Registers a new casino.
+
+Signature: `registerCasino(request: RegistrationRequest)`
+Returns: `CasinoMetadata`
+
+### updateCasino
+Updates an existing casino.
+
+Signature: `updateCasino(request: CasinoUpdateRequest)`
+Returns: `CasinoMetadata`
+
+### getCasinos
+Lists casinos with optional filters (`status`, `games`, pagination`).
+
+Signature: `getCasinos(filters?: CasinoFilters)`
+Returns: `CasinoMetadata[]`
+
+### getCasino
+Fetch one casino by id.
+
+### getCasinoByPublicKey
+Fetch one casino by Solana public key.
+
+### casinoExists
+Boolean existence check.
+
+### getStats
+Returns `{ totalCasinos, onlineCasinos, heartbeatsLast24h }`.
+

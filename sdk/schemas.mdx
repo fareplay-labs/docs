@@ -1,0 +1,26 @@
+---
+title: "SDK · Schemas"
+description: "Zod schemas for Fare Protocol objects and responses."
+---
+
+## Casino
+
+- `CasinoStatus`: `online | offline | maintenance | suspended`
+- `GameType`: common game identifiers
+- `CasinoMetadata`: id, name, url, publicKey, status, metadata, timestamps
+- `RegistrationRequest`: name, url, publicKey, signature, metadata
+- `CasinoUpdateRequest`: partial update fields + signature
+- `CasinoFilters`: status, games, limit, offset
+
+## Heartbeat
+
+- `HeartbeatPayload`: casinoId, status, timestamp, metrics, signature
+- `HeartbeatResponse`: success, timestamp, nextHeartbeatIn?
+
+## Protocol
+
+- `FARE_PROTOCOL_VERSION`, `FARE_PROTOCOL_SPEC`
+- `ApiResponse<T>` and `ApiResponseSchema(T)`
+- `ErrorCodes` and `ErrorCode`
+- `SdkConfig` and `SdkConfigSchema`
+

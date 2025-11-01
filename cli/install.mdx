@@ -1,0 +1,42 @@
+---
+title: "CLI · Install"
+description: "Prerequisites, installation, verification, and Fly.io authentication."
+---
+
+## Prerequisites
+
+- Node.js 18+
+- Git
+- Fly.io account and CLI (`fly` or `flyctl`)
+
+## Install
+
+```bash
+npm install -g fare-terminal
+```
+
+Verify:
+
+```bash
+fare --version
+fly version
+```
+
+## Authenticate with Fly.io
+
+```bash
+fly auth login
+fly orgs list
+```
+
+If you have multiple organizations, `fare init` will prompt you to select one.
+
+## Get started
+
+To create and deploy your first casino, proceed to the `init` command:
+
+- See: `/cli/commands/init`
+
+Note: The CLI automatically checks for the Fly.io CLI and will attempt to install or fix it if missing.
+
+

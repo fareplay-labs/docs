@@ -1,0 +1,45 @@
+---
+title: "SDK · Casino Client"
+description: "Send heartbeats and status updates from your casino backend."
+---
+
+## Constructor
+
+```ts
+import { FareCasinoClient } from '@fareplay/sdk';
+
+const casino = new FareCasinoClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+  casinoId: 'uuid',
+  privateKey: 'base58-private-key',
+  timeout: 30000,
+  retries: 3,
+  retryDelay: 1000,
+});
+```
+
+## Methods
+
+### sendHeartbeat
+Signs and posts a heartbeat. Returns `HeartbeatResponse`.
+
+Signature: `sendHeartbeat({ status, timestamp, metrics })`
+
+### updateStatus
+Convenience to send a heartbeat with the given status.
+
+Signature: `updateStatus(status)`
+
+### sendHeartbeatWithMetrics
+Send heartbeat with metrics such as `activePlayers`, `totalBets24h`, `uptime`, `responseTime`.
+
+Signature: `sendHeartbeatWithMetrics(status, metrics)`
+
+### goOnline, goOffline, goMaintenance
+Shortcuts for `updateStatus`.
+
+### startHeartbeat
+Starts an interval to send heartbeats; returns a `stop()` function.
+
+Signature: `startHeartbeat(intervalMs = 60000, status = 'online')`
+

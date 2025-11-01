@@ -1,0 +1,22 @@
+---
+title: "Starter · WebSocket"
+description: "Socket.IO events for live trials and stats."
+---
+
+Server namespace: `/casino`
+
+## Client → Server
+
+```js
+socket.emit('subscribeLiveTrials', { casinoId: 'xxx' });
+socket.emit('subscribePlayerTrials', { address: 'wallet_address' });
+```
+
+## Server → Client
+
+```js
+socket.on('trialRegistered', (trial) => {});
+socket.on('trialResolved', (trial) => {});
+socket.on('statsUpdate', (stats) => {});
+```
+

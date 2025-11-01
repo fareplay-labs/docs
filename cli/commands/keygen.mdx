@@ -1,0 +1,27 @@
+---
+title: "CLI · keygen"
+description: "Generate a Solana keypair for casino configuration."
+---
+
+## Usage
+
+```bash
+fare keygen [--output <env|json|both>] [--label <label>]
+```
+
+## Options
+
+- `-o, --output`: output format (prompted if omitted)
+- `-l, --label`: purpose/label (e.g., `heartbeat`, `owner`, or custom)
+
+## Output
+
+- Public key (address)
+- `.env` style or JSON byte array (or both)
+
+## Security
+
+- Never share private keys or commit them to git
+- Prefer `.env` and Fly secrets for server usage
+- Optionally save to a file (JSON or base58 text)
+
