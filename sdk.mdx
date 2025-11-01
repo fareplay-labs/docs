@@ -1,0 +1,103 @@
+---
+title: "SDK"
+description: "Official developer toolkit for Fare Protocol: typed clients, crypto, schemas."
+---
+
+## Features
+
+- Typed API clients for Discovery and Casino services
+- Solana cryptographic utilities (signing and verification)
+- Protocol schemas with Zod
+- ESM + CJS builds with TypeScript declarations
+
+## Installation
+
+```bash
+npm install @fareplay/sdk
+# or
+yarn add @fareplay/sdk
+# or
+bun add @fareplay/sdk
+```
+
+## Quick Start
+
+### Discovery Client
+
+```ts
+import { FareDiscoveryClient } from '@fareplay/sdk';
+
+const client = new FareDiscoveryClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+});
+
+// Register a casino
+await client.registerCasino({
+  name: 'My Casino',
+  url: 'https://mycasino.com',
+  publicKey: 'your-solana-public-key',
+  metadata: { description: 'A fun casino', games: ['slots', 'dice', 'rps'] },
+});
+
+// Fetch all casinos
+const casinos = await client.getCasinos();
+```
+
+### Casino Client
+
+```ts
+import { FareCasinoClient } from '@fareplay/sdk';
+
+const client = new FareCasinoClient({
+  baseUrl: 'https://api.discover.fareplay.io',
+  casinoId: 'your-casino-id',
+  privateKey: 'your-private-key',
+});
+
+// Send heartbeat
+await client.sendHeartbeat({ status: 'online', timestamp: Date.now() });
+```
+
+### Signature Utilities
+
+```ts
+import { verifySolanaSignature, signMessage } from '@fareplay/sdk';
+
+const signature = await signMessage(message, privateKey);
+const isValid = verifySolanaSignature(message, signature, publicKey);
+```
+
+## Core Modules
+
+### Client
+
+- `FareDiscoveryClient` — register, update, and fetch casinos
+- `FareCasinoClient` — heartbeat and status from the casino side
+
+### Crypto
+
+- `signMessage()` — sign messages with Solana keypair
+- `verifySolanaSignature()` — verify Solana signatures
+
+### Schema
+
+Zod schemas for protocol objects (e.g., `CasinoMetadata`, `HeartbeatPayload`).
+
+## Development
+
+```bash
+bun install
+bun run build
+bun run typecheck
+bun run dev
+```
+
+## Versioning
+
+Implements Fare Protocol Spec v1.0.0.
+
+## Links
+
+- Getting Started, API reference, and more in the SDK repo `docs/` folder.
+
+

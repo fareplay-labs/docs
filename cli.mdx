@@ -1,0 +1,118 @@
+---
+title: "CLI"
+description: "Command-line installer and deployment tool for Fare Protocol custom casinos."
+---
+
+## Overview
+
+`fare-terminal` automates deploying a custom casino backend to production with zero manual infrastructure setup.
+
+## Installation
+
+```bash
+npm install -g fare-terminal
+```
+
+Development install:
+
+```bash
+npm install
+npm run build
+npm link
+```
+
+## Commands
+
+### `fareplay init <casino-name>`
+
+Initialize and deploy a new custom casino.
+
+What it does:
+- Clone backend template
+- Interactive configuration
+- Build TypeScript project
+- Create Fly.io app and provision Redis, object storage, Postgres
+- Set env secrets, run migrations, deploy
+
+Example:
+
+```bash
+fareplay init my-awesome-casino
+```
+
+Prompts include Solana owner wallet, RPC provider, and JWT secret.
+
+### `fareplay deploy`
+
+Rebuild and redeploy existing casino.
+
+```bash
+cd ~/.fare-casinos/my-awesome-casino
+fareplay deploy
+```
+
+### `fareplay status`
+
+Check deployment health (api, ws, processor) and service URLs.
+
+```bash
+cd ~/.fare-casinos/my-awesome-casino
+fareplay status
+```
+
+### `fareplay logs [service]`
+
+Stream logs from Fly.io services (`api`, `ws`, `processor`).
+
+```bash
+fareplay logs        # all services
+fareplay logs api
+fareplay logs ws
+fareplay logs processor
+```
+
+### `fareplay cleanup`
+
+Delete local casinos and Fly.io resources. Destructive — for development only.
+
+```bash
+fareplay cleanup
+fareplay cleanup --org <org>
+```
+
+## Development
+
+```bash
+npm install
+npm run build
+
+# Dev mode
+npm run dev -- init test-casino
+
+# Watch mode
+npm run watch
+```
+
+## Project Structure
+
+```text
+fare-terminal/
+├── src/
+│   ├── commands/   # init, deploy, status, logs
+│   ├── utils/      # fly, git, prompts, config, npm, install, banner
+│   ├── types/      # TS types
+│   └── index.ts    # CLI entry
+└── package.json
+```
+
+## Requirements
+
+- Node.js >= 18
+- Git
+- Fly.io CLI
+
+## License
+
+MIT
+
+

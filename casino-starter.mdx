@@ -1,0 +1,146 @@
+---
+title: "Casino Starter"
+description: "Full‑stack Solana casino starter (API + Web) built on Fare Protocol."
+---
+
+## Monorepo Structure
+
+```text
+fare-casino/
+├── apps/
+│   ├── api/   # NestJS Backend API
+│   └── web/   # React + Vite Frontend
+└── packages/
+    └── types/ # Shared TypeScript types
+```
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- PostgreSQL 14+
+- Redis 7+
+
+### Install
+
+```bash
+npm install
+
+# Build shared types
+cd packages/types && npm run build && cd ../..
+```
+
+### Development
+
+Start API (http://localhost:8080):
+
+```bash
+npm run dev:api
+```
+
+Start Web (http://localhost:3000):
+
+```bash
+npm run dev:web
+```
+
+Start both:
+
+```bash
+npm run dev
+```
+
+## Environment
+
+Backend (`apps/api/.env`):
+
+```bash
+CASINO_NAME="My Casino"
+SOLANA_OWNER_ADDRESS="your_wallet"
+DATABASE_URL="postgresql://user:password@localhost:5432/casino_db?schema=public"
+REDIS_URL="redis://localhost:6379"
+PORT=8080
+NODE_ENV=development
+SOLANA_RPC_URL="https://api.mainnet-beta.solana.com"
+SOLANA_WS_URL="wss://api.mainnet-beta.solana.com"
+```
+
+Frontend (`apps/web/.env`):
+
+```bash
+VITE_API_URL=http://localhost:8080/api
+VITE_WS_URL=http://localhost:8080
+VITE_SOLANA_NETWORK=mainnet-beta
+VITE_SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
+```
+
+## API Overview
+
+Player endpoints:
+
+```text
+GET /api/player/:address
+GET /api/player/:address/trials
+GET /api/player/:address/casino/:casinoId
+```
+
+Stats endpoints:
+
+```text
+GET /api/stats
+GET /api/stats/casino/:id
+GET /api/stats/pool/:address
+```
+
+Health:
+
+```text
+GET /api/health
+GET /api/health/ready
+GET /api/health/live
+```
+
+## WebSocket
+
+Connect to `ws://localhost:8080/casino`.
+
+Client → Server:
+
+```js
+socket.emit('subscribeLiveTrials', { casinoId: 'xxx' });
+socket.emit('subscribePlayerTrials', { address: 'wallet' });
+```
+
+Server → Client:
+
+```js
+socket.on('trialRegistered', (trial) => {});
+socket.on('trialResolved', (trial) => {});
+socket.on('statsUpdate', (stats) => {});
+```
+
+## Scripts
+
+Root:
+
+```bash
+npm run dev
+npm run build
+npm run dev:api
+npm run dev:web
+npm run lint
+npm run test
+```
+
+## Deployment
+
+Backend (Fly.io) high‑level steps:
+- Create app
+- Provision Postgres and Redis
+- Set secrets (e.g., `CASINO_NAME`, `SOLANA_OWNER_ADDRESS`)
+- Deploy
+
+Frontend: build and deploy `apps/web/dist` to your hosting provider.
+
+
